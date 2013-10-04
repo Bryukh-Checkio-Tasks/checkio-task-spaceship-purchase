@@ -1,11 +1,12 @@
-def checkio(a, b):
-    """
-        sums two passed arguments
-    """
-    return None
+def checkio(data):
+
+    initial_sofi, raise_sofi, initial_oldman, reduction_oldman = data
+
+    #replace this for solution
+    return 0
+
 
 #These "asserts" using only for self-checking and not necessary for auto-testing
 if __name__ == '__main__':
-    assert checkio(3, 2) == 5
-    assert checkio(5, 7) == 12
-    print('Done')
+    assert checkio([150, 50, 1000, 100]) == 450, "1st example"
+    assert checkio([150, 50, 900, 100]) == 400, "2nd example"
