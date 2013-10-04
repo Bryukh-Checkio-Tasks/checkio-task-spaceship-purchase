@@ -75,43 +75,115 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
                 $content.find('.call').html('Pass: checkio(' + JSON.stringify(checkioInput) + ')');
                 $content.find('.answer').remove();
             }
-            //Dont change the code before it
-
-            //Your code here about test explanation animation
-            //$content.find(".explanation").html("Something text for example");
-            //
-            //
-            //
-            //
-            //
-
-
+            var $explanation = $content.find(".explanation");
+            
+            var newtd = function() {
+                return $("<td>")
+            };
+            
+            var $table = $explanation.find("table.price-process");
+            var $toptr = (function() {
+                var $tr = $("<tr>");
+                $tr.append(newtd().html(checkioInput[1]));
+                $tr.append(newtd().html(checkioInput[0]));
+                $tr.append(newtd().html(checkioInput[2]));
+                $tr.append(newtd().html(checkioInput[3]));
+                return $tr;
+            })();
+            $table.append($toptr);
+            
+            //solve the task :)
+            (function() {
+                var addFinaltr = function(price) {
+                    var $finaltr = $("<tr>");
+                    $finaltr.append($("<td>").attr("colspan", 4));
+                    $finaltr.find("td").html(price);
+                    $finaltr.addClass("tr-final");
+                    return $finaltr;
+                };
+                var $lasttd;
+            
+                var sofi = checkioInput[0];
+                var oldman = checkioInput[2];
+                var increase = checkioInput[1];
+                var decrease = checkioInput[3];
+                var finalPrice = 0;
+                while (true){
+                    sofi += increase;
+                    var $pricetr = $("<tr>");
+                    $table.append($pricetr);
+                    $pricetr.append(newtd());
+                    $lasttd = newtd().html(sofi);
+                    $pricetr.append($lasttd);
+                    if (sofi >= oldman) {
+                        if (sofi > oldman){
+                            $lasttd.addClass("useless-price");
+                        }
+                        $pricetr.append(newtd());
+                        $pricetr.append(newtd());
+                        finalPrice = oldman;
+                        $table.append(addFinaltr(finalPrice));
+                        break;
+                    }
+                    oldman -= decrease;
+                    $lasttd = newtd().html(oldman);
+                    $pricetr.append($lasttd);
+                    if (sofi >= oldman) {
+                        if (sofi > oldman){
+                            $lasttd.addClass("useless-price");
+                        }
+                        $pricetr.append(newtd());
+                        finalPrice = sofi;
+                        $table.append(addFinaltr(finalPrice));
+                        break;
+                    }
+                    $pricetr.append(newtd());
+                }
+            
+            })();
+            
             this_e.setAnimationHeight($content.height() + 60);
 
         });
 
-       
+        function isNumber(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+        //TRYIT
 
-        var colorOrange4 = "#F0801A";
-        var colorOrange3 = "#FA8F00";
-        var colorOrange2 = "#FAA600";
-        var colorOrange1 = "#FABA00";
+        var $tryit;
 
-        var colorBlue4 = "#294270";
-        var colorBlue3 = "#006CA9";
-        var colorBlue2 = "#65A1CF";
-        var colorBlue1 = "#8FC7ED";
+        ext.set_console_process_ret(function(this_e, ret){
+            $tryit.find(".checkio-result").html('Final price: '+ ret);
+        });
 
-        var colorGrey4 = "#737370";
-        var colorGrey3 = "#9D9E9E";
-        var colorGrey2 = "#C5C6C6";
-        var colorGrey1 = "#EBEDED";
+        ext.set_generate_animation_panel(function(this_e){
 
-        var colorWhite = "#FFFFFF";
-        //Your Additional functions or objects inside scope
-        //
-        //
-        //
+            $tryit = $(this_e.setHtmlTryIt(ext.get_template('tryit'))).find(".tryit-content");
+            var increase = 50;
+            var decrease = 100;
+            var sofi = 100;
+            var oldman = 1000;
+
+            var checkSetInput = function(invar, inputClass) {
+                var $input = $tryit.find(inputClass);
+                if (isNumber($input.val())) {
+                    invar = parseInt($input.val());
+                }
+                $input.val(invar);
+                return invar;
+            }
+
+            $tryit.find("form").submit(function(e){
+                sofi = checkSetInput(sofi, ".input-sofi");
+                oldman = checkSetInput(oldman, ".input-oldman");
+                increase = checkSetInput(increase, ".input-increase");
+                decrease = checkSetInput(decrease, ".input-decrease");
+                this_e.sendToConsoleCheckiO([sofi, increase, oldman, decrease]);
+                e.stopPropagation();
+                return false;
+            })
+        });
 
 
     }
