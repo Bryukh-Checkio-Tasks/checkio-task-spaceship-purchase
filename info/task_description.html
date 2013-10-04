@@ -1,39 +1,68 @@
+<div class="story"
+     style="background: url(/media/files/tasks/robots/spaceship_purchase_v1_400.png) no-repeat -2px -21px">
+    <div style="float:left; width:389px; height:329px"></div>
+    <p>"This is so stressful! We really need this ship, but I'm not sure we’ll have enough money for it! What if the old
+        merchant-bot asks for too much?" Sofia talked to herself as she paced from one end of the room to the other.</p>
+
+    <p>"Of course he will," said Nikola in his typically calm manner.</p>
+
+    <p>"What?!? Do you know him?!? Why didn't you told me this before?!"</p>
+
+    <p>"Well I don’t know him personally, but I know that the robots of his class and release year are notoriously savvy
+        merchants. His module is pretty old though so you should offer him just a little bit of money for the ship at
+        first and he will counteroffer with a much higher price. Add a little more money to each offer and he will
+        reduce his counteroffer by roughly the same amount every time."</p>
+
+    <p>"That sounds like a good strategy. He's a very old robot. Hey, what do you think that old codger is even doing on
+        the island? <a class="more"><b>More...</b></a></p>
+
+    <div class="end">
+        <p>...I don’t think I’ve seen anyone older than him around here.''</p>
+
+        <p>"Based on my data, he was one of the earliest settlers here to control the shuttle landing strip. It's been
+            over 20 years since the last shuttle landed there. Despite that, he still follows his program by keeping the
+            landing strip clean and orderly."</p>
+
+        <p>"Sounds like an odd character. Well we really need this ship, we’ll have to make sure that we have enough
+            money to buy it.”</p>
+    </div>
+</div>
 <p>
-    <i>( Describe task in general )</i>
+    Write a program that will (depending on Sofia and the old man’s initial bargaining sums--the steps by which they will
+    increase or decrease the price during their negotiations) calculate which final price they will agree upon. If
+    Sofia's offer is lower than or equal to the old man's offer, she will accept the old man's price and vice versa.
 </p>
-
 <p>
-    Sum two passed ints
+    Sofia makes her offer first. She never offers an amount higher than what is offered to her. On the other hand, the
+    old man never offers an amount lower than what is offered to him.
 </p>
 
-<p style="text-align: center;">
-    <img class="for_info_only" title="example" src="{{MEDIA}}example.png" alt="example" width="392px"/>
-    <img class="for_editor_only" title="example" src="{{MEDIA}}example.png" alt="example" width="380px"/>
-</p>
-
-<p><i>( Explain input and output values )</i></p>
-<p>
-    <strong>Input: </strong> Two arguments. Both are int
-</p>
-
-<p>
-    <strong>Output: </strong> Int. 
-</p>
-
-
-
-<div class="for_info_only">
-    <p><i>( Put some usage examples )</i></p>
-    <p>
-        <strong>Example:</strong>
-    </p>
-    <pre class="brush: python">
-checkio(3, 2) == 5
-checkio(5, 7) == 12
-    </pre>
+<div>
+    <strong>Input data:</strong>
+    Contains four integer numbers: Sofia's initial offer, Sofia's raise to her offer, the
+    initial counteroffer from the old man, and the old man's reduction in his offer;
+</div>
+<div><strong>Output data:</strong>
+    The amount of money that Sofia will pay for the spaceship.
 </div>
 
-<p class="for_info_only">
-    <strong>How it is used: </strong>
-    <i>(Here you can explain how it can be used in development and what is usage of this.)</i>
-</p>
+<div class="for_info_only"><strong>Example:</strong>
+<pre class="brush: python">checkio([150, 50, 1000, 100]) == 450
+#Sofia: 200
+#Oldman: 900
+#Sofia: 250
+#Oldman: 800
+#Sofia: 300
+#Oldman: 700
+#Sofia: 350
+#Oldman: 600
+#Sofia: 400
+#Oldman: 500
+#Sofia: 450
+#... old man will be ok with it, because his next proposition will be lower than 450.
+
+# a bit shorter example
+checkio([500, 300, 700, 100]) == 700
+#Sofia will be ok with 700 because her next proposition will be higher
+</pre>
+</div>
